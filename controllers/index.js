@@ -1,5 +1,9 @@
 var ProfileController = require("./ProfileController")
+var CommentController = require("./CommentController")
 
 module.exports = {
-  profile: ProfileController
+
+  profile: ProfileController,
+  comment: CommentController
+
 }
