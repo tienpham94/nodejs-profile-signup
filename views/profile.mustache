@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title> {{header}} </title>
+    <title>{{ header }}</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
     <h1>Profile</h1>
     <h3>Welcome {{ profile.username }}</h3>
-    <form method="post" action="/account/comment">
-      <textarea name="text" placeholder="Comment"></textarea>
-      <br />
-      <input type="submit" value="Submit Comment" />
-    </form>
+    <a href="/account/logout">Logout</a>
+    <br /><br />
+    <form action="/account/comment" method="post">
+	    <textarea name="text" placeholder="Comment"></textarea>
+	    <br />
+	    <input type="submit" value="Submit Comment" />
+	</form>
 
     <h3>Your Comments</h3>
     <ol>
-      <li>Comment 1</li>
-      <li>Comment 2</li>
-      <li>Comment 3</li>
-      <li>Comment 4</li>
+      {{#comments}}
+        <li>{{text}} | {{profile}}</li>
+
+      {{/comments}}
+
     </ol>
+
+
   </body>
 </html>

@@ -6,10 +6,7 @@ var jwt = require('jsonwebtoken')
 
 router.get('/logout', function(req, res, next){
 	req.session.reset()
-	res.json({
-		confirmation: 'success',
-		user: null
-	})
+	res.redirect('/')
 })
 
 router.get('/currentuser', function(req, res, next){
@@ -115,48 +112,53 @@ router.post('/login', function(req, res, next){
 	})
 })
 
-router.post("/comment", (req,res) => {
+router.post('/comment', function(req, res, next){
 
-  if(req.session == null){
-    res.json({
-      confirmation: "fail",
-      message:"not logged in"
-    })
-  }
+	if (req.session == null){
+		res.json({
+			confirmation: 'fail',
+			message: 'not logged in'
+		})
 
-  if(req.session.token == null){
-    res.json({
-      confirmation: "fail",
-      message:"not logged in"
-    })
-  }
+		return
+	}
 
-  var token = req.session.token
-  jwt.verify(token, process.env.TOKEN_SECRET, (err,decode) =>{
-    if(err){
-      res.json({
-        confirmation:"fail",
-        message:"Invalid Token"
-      })
+	if (req.session.token == null){
+		res.json({
+			confirmation: 'fail',
+			message: 'not logged in'
+		})
 
-      return
-    }
+		return
+	}
 
-    //Success!
-      var commentData = req.body
-      commentData["profile"] = decode.id
+	var token = req.session.token
+	jwt.verify(token, process.env.TOKEN_SECRET, function(err, decode){
+		if (err){
+			res.json({
+				confirmation: 'fail',
+				message: 'Invalid Token'
+			})
 
-      controllers.comment
-      .post(commentData)
-      .then((result) =>{
-        res.redirect("/profile")
-      })
-      .catch((err) => {
+			return
+		}
 
-      })
-  })
+		// Success!
+		var commentData = req.body
+		commentData['profile'] = decode.id
+
+		controllers.comment
+		.post(commentData)
+		.then(function(result){
+			res.redirect('/profile')
+		})
+		.catch(function(err){
+
+		})
+	})
 
 
 })
+
 
 module.exports = router
