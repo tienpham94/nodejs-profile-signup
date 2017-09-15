@@ -7,6 +7,18 @@
   <body>
     <h1>Profile</h1>
     <h3>Welcome {{ username }}</h3>
+    <form method="post" action="/account/comment">
+      <textarea name="text" placeholder="Comment"></textarea>
+      <br />
+      <input type="submit" value="Submit Comment" />
+    </form>
 
+    <h3>Your Comments</h3>
+    <ol>
+      <li>Comment 1</li>
+      <li>Comment 2</li>
+      <li>Comment 3</li>
+      <li>Comment 4</li>
+    </ol>
   </body>
 </html>

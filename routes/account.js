@@ -115,6 +115,51 @@ router.post('/login', function(req, res, next){
 	})
 })
 
+router.post("/comment", (req,res) => {
 
+  if(req.session == null){
+    res.json({
+      confirmation: "fail",
+      message:"not logged in"
+    })
+  }
+
+  if(req.session.token == null){
+    res.json({
+      confirmation: "fail",
+      message:"not logged in"
+    })
+  }
+
+  var token = req.session.token
+  jwt.verify(token, process.env.TOKEN_SECRET, (err,decode) =>{
+    if(err){
+      res.json({
+        confirmation:"fail",
+        message:"Invalid Token"
+      })
+
+      return
+    }
+
+    //Success!
+      var commentData = req.body
+      commentData["profile"] = decode.id
+
+      controllers.comment
+      .post(commentData)
+      .then((result) =>{
+        res.json({
+          confirmation:"success",
+          comment: result
+        })
+      })
+      .catch((err) => {
+
+      })
+  })
+
+
+})
 
 module.exports = router
