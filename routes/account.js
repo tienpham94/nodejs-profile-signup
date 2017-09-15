@@ -149,10 +149,7 @@ router.post("/comment", (req,res) => {
       controllers.comment
       .post(commentData)
       .then((result) =>{
-        res.json({
-          confirmation:"success",
-          comment: result
-        })
+        res.redirect("/profile")
       })
       .catch((err) => {
 

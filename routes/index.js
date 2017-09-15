@@ -29,8 +29,18 @@ router.get('/profile', function(req, res, next) {
 		controllers.profile
 		.getById(decode.id)
 		.then(function(profile){
-		    res.render('profile', profile)
+//		    res.render('profile', profile)
+//		    fetch profile comment
+        return controllers.comment.get({profile: profile.id})
 		})
+    .then((comments) =>{
+      console.log("COMMENTS:"+ JSON.stringify(comments));
+      var data = {
+        profile: profile,
+        comments: comments
+      }
+      rens.render("profile", profile)
+    })
 		.catch(function(err){
 		    res.render('profile', null)
 		})
