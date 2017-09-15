@@ -13,5 +13,13 @@
       <input type="submit" value="Submit" />
     </form>
 
+    <h1>Login</h1>
+    <form action="/account/login" method="post">
+      <input type="text" name="email" placeholder="Email" /><br />
+      <input type="text" name="username" placeholder="Username" /><br />
+      <input type="text" name="password" placeholder="Password" /><br />
+      <input type="submit" value="Submit" />
+    </form>
+
   </body>
 </html>
