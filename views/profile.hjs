@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> {{header}} </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Profile</h1>
+    <h3>Welcome {{ username }}</h3>
+
+  </body>
+</html>

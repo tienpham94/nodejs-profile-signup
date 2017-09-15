@@ -11,6 +11,11 @@ module.exports = {
           return
         }
 
+        var results = []
+        comments.forEach((comment, i) =>{
+          results.push(comment.summary())
+        })
+
         resolve(comments)
       })
     })
@@ -28,7 +33,7 @@ module.exports = {
           return
         }
 
-        resolve(comment)
+        resolve(comment.summary())
       })
     })
   }
@@ -41,7 +46,7 @@ module.exports = {
           return
         }
 
-        resolve(comment)
+        resolve(comment.summary())
       })
     })
   }

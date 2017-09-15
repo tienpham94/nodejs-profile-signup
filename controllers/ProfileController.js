@@ -1,5 +1,6 @@
 var Profile = require("../models/Profile")
 var Promise = require("bluebird")
+var bcrypt = require("bcryptjs")
 
 module.exports = {
 
@@ -11,7 +12,11 @@ module.exports = {
           return
         }
 
-        resolve(profiles)
+        var results = []
+        profiles.forEach((profile, i) =>{
+          results.push(profile.summary())
+        })
+        resolve(results)
       })
     })
   },
@@ -28,20 +33,27 @@ module.exports = {
           return
         }
 
-        resolve(profile)
+        resolve(profile.summary())
       })
     })
   }
   ,
   post: (body)=>{
     return new Promise((resolve, reject) =>{
+
+      if(body.password != null){
+        var password = body.password // plain
+        var hashed = bcrypt.hashSync(password)
+        body["password"] = hashed
+      }
+
       Profile.create(body,(err, profile)=>{
         if(err){
           reject(err)
           return
         }
 
-        resolve(profile)
+        resolve(profile.summary())
       })
     })
   }
