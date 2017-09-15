@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose')
 var sessions = require('client-sessions')
+require('dotenv').config()
 
 var dbUrl = "mongodb://localhost/profile-signup"
 mongoose.connect(dbUrl, function(err, res){
@@ -36,7 +37,7 @@ app.use(cookieParser());
 app.use(sessions({
   cookieName: 'session',
   duration: 24*60*60*1000,
-  secret: 'awawfdd',
+  secret: process.env.SESSION_SECRET,
   activeDuration: 30*60*1000
 }))
 app.use(express.static(path.join(__dirname, 'public')));
