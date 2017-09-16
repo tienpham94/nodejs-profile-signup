@@ -5,7 +5,7 @@ var controllers = require('../controllers')
 
 router.get('/', function(req, res, next) {
 
-    res.render('index', { header: 'Velocity 360', visitor:'Dan' })
+    res.render('index', { header: 'Tien Pham' })
 
 })
 
