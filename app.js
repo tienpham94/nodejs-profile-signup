@@ -8,7 +8,8 @@ var mongoose = require('mongoose')
 var sessions = require('client-sessions')
 require('dotenv').config()
 
-var dbUrl = "mongodb://localhost/profile-signup"
+var dbUrl = process.env.MONGODB_URI || "mongodb://localhost/profile-signup";
+
 mongoose.connect(dbUrl, function(err, res){
   if(err){
     console.log("DB CONNECTION FAILED");
