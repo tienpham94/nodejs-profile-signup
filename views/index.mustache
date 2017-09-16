@@ -2,9 +2,14 @@
 <html>
   <head>
     <title>{{ header }}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
   </head>
   <body>
+    {{>nav}}
+
+
     <h1>Sign Up</h1>
     <form action="/account/register" method="post">
     	<input type="text" name="email" placeholder="Email" /><br />
